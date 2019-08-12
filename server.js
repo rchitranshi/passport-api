@@ -1,14 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const http = require('http');
 const port = parseInt(process.env.port, 10) || 1000;
-const path = require('path');
+const passport = require('passport');
 
-//Set up express app
-const app = express();
+const strategy = require('./server/config/passport');
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+passport.use(strategy);
+
+var app = express();
+app.use(passport.initialize());
+
+// parse application/x-www-form-urlencoded
+// for easier testing with Postman or plain HTML forms
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+// parse application/json
+app.use(bodyParser.json())
 
 require('./server/routes')(app);
 

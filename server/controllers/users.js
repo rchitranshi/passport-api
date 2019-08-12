@@ -52,7 +52,7 @@ module.exports = {
 						jwt.verify(token, 'nodeauthsecret', (err, data) => {
 							console.log(err, data);
 						});
-						res.json({success: true, token: `JWT${token}`});
+						res.json({success: true, token: `${token}`});
 					}else{
 						res.status(401).json({success: false, msg: "Authentication failed. Wrong password"})
 					}

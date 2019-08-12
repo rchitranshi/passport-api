@@ -1,6 +1,7 @@
 const UserCtrl = require('../controllers').UsersCtrl;
 const passport = require("passport");
 
+console.log(require('../config/passport'));
 module.exports = (app) => {
 	app.post('/api/users/create', UserCtrl.create);
 	app.post('/api/users/login', UserCtrl.login);
